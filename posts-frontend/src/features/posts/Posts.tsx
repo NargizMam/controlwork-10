@@ -20,7 +20,7 @@ const Posts = () => {
     <OneNews key={news.id}
              id={news.id}
              title={news.title}
-             dateStart={news.createdAt}
+             createdAt={news.createdAt}
              image={news.image}
     />
   ));

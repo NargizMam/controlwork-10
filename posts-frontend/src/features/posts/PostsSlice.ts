@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { ApiNews, News, NewsMutation } from '../../types';
+import { ApiNews, News } from '../../types';
 import { RootState } from '../../app/store';
 import { createNews, deleteNews, fetchNewsList, fetchOneNews } from './PostsThunk';
 

@@ -3,7 +3,6 @@ import axiosApi from '../../axiosApi';
 import { ApiNews, News, NewsMutation } from '../../types';
 
 
-
 export const fetchNewsList = createAsyncThunk<ApiNews[]>(
   'news/fetchAll',
   async () => {
@@ -22,12 +21,12 @@ export const fetchOneNews = createAsyncThunk<News, string>(
     return newsInfo;
   }
 )
-export const createNews = createAsyncThunk<string, ApiNews>(
+export const createNews = createAsyncThunk<string, NewsMutation>(
   'news/create',
   async (newsMutation) => {
     const formData = new FormData();
 
-    const keys = Object.keys(newsMutation) as (keyof ApiNews)[];
+    const keys = Object.keys(newsMutation) as (keyof NewsMutation)[];
     keys.forEach(key => {
       const value = newsMutation[key] as string;
 

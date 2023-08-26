@@ -24,10 +24,10 @@ interface Props {
   id: string,
   title: string,
   image: string | null,
-  dateStart: string
+  createdAt: string
 }
 
-const OneNews: React.FC<Props> = ({id, title, image, dateStart}) => {
+const OneNews: React.FC<Props> = ({id, title, image, createdAt}) => {
   const dispatch = useAppDispatch();
   const deleting = useAppSelector(selectDeleting);
   const callbackMessage = useAppSelector(selectCallbackMessage);
@@ -36,7 +36,7 @@ const OneNews: React.FC<Props> = ({id, title, image, dateStart}) => {
     imagePath = apiUrl + '/' + image;
   }
 
-  const atDate = dayjs(dateStart).format('DD-MM-YYYY {HH:mm}');
+  const atDate = dayjs(createdAt).format('DD-MM-YYYY {HH:mm}');
 
   const onDeleteNews = async () => {
     await dispatch(deleteNews(id));
@@ -46,19 +46,19 @@ const OneNews: React.FC<Props> = ({id, title, image, dateStart}) => {
   return (
     <Grid item xs={12} sm={12} md={6} lg={3}>
       {deleting ? <Typography>{callbackMessage}</Typography> : null}
-      <Card sx={{maxWidth: 550, margin: 5}}>
+      <Card sx={{maxWidth: 700, margin: 5}}>
         <CardActionArea>
-          {image ? <CardMedia image={imagePath}/> : null}
+          <CardMedia sx={{height: 140}} image={imagePath}/>
           <CardHeader title={title}/>
           <CardContent>
-            {dateStart ? `At ${atDate}` : null}
+            {createdAt ? `Published ${atDate}` : null}
           </CardContent>
         </CardActionArea>
         <CardActions sx={{
           display: 'flex',
           justifyContent: 'space-between'
         }}>
-          <IconButton component={Link} to={'/news/' + id}>
+          <IconButton component={Link} to={'/news-info/' + id}>
             Read full post
             <ArrowForward/>
           </IconButton>

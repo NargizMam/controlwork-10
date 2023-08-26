@@ -2,7 +2,7 @@ export interface News {
     id: number,
     title: string,
     text: string,
-    image: string | null,
+    image: File | null,
     createdAt: string
 }
 export interface ApiNews {

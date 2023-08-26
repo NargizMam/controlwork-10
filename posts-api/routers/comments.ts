@@ -42,7 +42,10 @@ commentsRouter.post('/', async  (req, res) => {
             [req.body.author, req.body.message, req.body.news_id]
         );
         const comment = result[0] as OkPacketParams;
-        res.send('Комментарий создан!');
+        res.send({
+            ...comment,
+            id: comment.insertId
+        });
     }catch (e) {
         res.status(500).send({message: 'Что-то пошло не так!'});
     }

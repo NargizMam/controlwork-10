@@ -7,14 +7,19 @@ import {imagesUpload} from "../multer";
 const newsRouter = express.Router();
 
 newsRouter.get('/', async (req, res) => {
-    const connection =  mysqlDb.getConnection();
-    const result = await connection.query('SELECT id, title, image, createdAt FROM news');
-    const newsList = result[0] as ApiNews[];
-     res.send(newsList);
+    try{
+        const connection =  mysqlDb.getConnection();
+        const result = await connection.query('SELECT id, title, image, createdAt FROM news');
+        const newsList = result[0] as ApiNews[];
+        res.send(newsList);
+    }catch (e) {
+        res.status(404).send({message:'Что-то пошла не так'});
+    }
+
 });
 newsRouter.get('/:id', async (req, res) => {
-    const connection =  mysqlDb.getConnection();
     try {
+        const connection =  mysqlDb.getConnection();
         const result = await connection.query(
             'SELECT * FROM news WHERE id = ?', [req.params.id]);
         const newsList = result[0] as News[];
@@ -24,10 +29,8 @@ newsRouter.get('/:id', async (req, res) => {
             return res.status(404).send({ERROR: 'News not found!'});
         }
     }catch (e) {
-        res.status(404).send('News not found!');
+        res.status(404).send({message:'Что-то пошла не так'});
     }
-
-
 });
 newsRouter.post('/', imagesUpload.single('image') ,async (req, res) => {
     if(!req.body.title || !req.body.text){
@@ -38,16 +41,21 @@ newsRouter.post('/', imagesUpload.single('image') ,async (req, res) => {
         text: req.body.text,
         image: req.file ? req.file.filename : null,
     }
-    const connection =  mysqlDb.getConnection();
-    const result = await connection.query(
-        'INSERT INTO news (title, text, image) VALUES (?, ?, ?)',
-        [newsData.title, newsData.text, newsData.image]
-    );
-    const info = result[0] as OkPacketParams;
-    res.send({
-        ...newsData,
-        id: info.insertId,
-    });
+    try{
+        const connection =  mysqlDb.getConnection();
+        const result = await connection.query(
+            'INSERT INTO news (title, text, image) VALUES (?, ?, ?)',
+            [newsData.title, newsData.text, newsData.image]
+        );
+        const info = result[0] as OkPacketParams;
+        res.send({
+            ...newsData,
+            id: info.insertId,
+        });
+    }catch (e) {
+        res.status(404).send({message:'Что-то пошла не так!'});
+    }
+
 });
 newsRouter.delete('/:id', async (req, res) => {
     const connection =  mysqlDb.getConnection();

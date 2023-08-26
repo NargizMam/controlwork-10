@@ -22,3 +22,4 @@ export interface Comment {
     author: string,
     message: string
 }
+export type ApiComment = Omit<Comment, 'id'>

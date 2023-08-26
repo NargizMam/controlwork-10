@@ -6,7 +6,6 @@ import theme from './theme';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material';
 import { store } from './app/store';
-import './indes.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

@@ -6,7 +6,7 @@ export interface News {
     createdAt: string
 }
 export interface ApiNews {
-    id: number,
+    id: string,
     title: string,
     image: string | null,
     createdAt: string

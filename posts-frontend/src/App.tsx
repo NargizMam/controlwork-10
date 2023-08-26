@@ -1,15 +1,23 @@
 import React from 'react';
-import {Routes} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import AppToolBar from './components/UI/AppToolBar/AppToolBar';
 import {Container, CssBaseline} from '@mui/material';
+import Posts from './features/posts/Posts';
 
 const App = () => (
-    <Container className="App">
+    <>
       <CssBaseline/>
-      <AppToolBar/>
-      <Routes>
-      </Routes>
-    </Container>
+      <header>
+        <AppToolBar/>
+      </header>
+      <main>
+        <Container>
+          <Routes>
+            <Route path="/" element={<Posts/>}/>
+          </Routes>
+        </Container>
+      </main>
+    </>
 );
 
 export default App;

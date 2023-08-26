@@ -7,7 +7,7 @@ interface Props {
   onSubmit: (mutation: CommentsMutation) => void;
 }
 
-const CommentsForm: React.FC<Props> = ({onSubmit, loading}) => {
+const CommentsForm: React.FC<Props> = ({onSubmit}) => {
   const [state, setState] = useState<CommentsMutation>({
     author: 'Anonymous',
     message: '',

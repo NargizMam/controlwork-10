@@ -13,7 +13,7 @@ interface Props {
   message: string
 }
 
-const OneComment: React.FC<Props> = ({idComment, news_id, author, message}) => {
+const OneComment: React.FC<Props> = ({author, message}) => {
   const dispatch = useAppDispatch();
   const deleting = useAppSelector(selectCommentsDeleting);
   const {id} = useParams();

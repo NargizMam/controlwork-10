@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axiosApi from '../../axiosApi';
-import { ApiComment, News, NewsMutation } from '../../types';
+import { ApiComment, CommentsMutation } from '../../types';
 
 
 export const fetchCommentsList = createAsyncThunk<ApiComment[], string>(
@@ -10,11 +10,10 @@ export const fetchCommentsList = createAsyncThunk<ApiComment[], string>(
     return newsResponse.data;
   }
 );
-export const createComments = createAsyncThunk<string, CommentsMutation>(
+export const createComments = createAsyncThunk<void, CommentsMutation>(
   'comments/create',
-  async (newsMutation) => {
-
-    const message =  await axiosApi.post('/news', );
+  async (comment ) => {
+    const message =  await axiosApi.post('/comments', comment);
     return message.data;
   }
 );

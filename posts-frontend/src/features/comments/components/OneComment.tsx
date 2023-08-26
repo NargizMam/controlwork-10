@@ -3,7 +3,7 @@ import { Card, CardActionArea, CardActions, CardHeader, Grid, Typography } from 
 import LoadingButton from '@mui/lab/LoadingButton';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { selectCommentsDeleting } from '../CommentsSlice';
-import { fetchCommentsList } from '../CommentsThunk';
+import { deleteComment, fetchCommentsList } from '../CommentsThunk';
 import { useParams } from 'react-router-dom';
 
 interface Props {
@@ -24,8 +24,10 @@ const OneComment: React.FC<Props> = ({idComment, news_id, author, message}) => {
     }
   }, [dispatch, id])
   const onDelete = async () => {
-    await dispatch(dele)
-  }
+    if(id){
+      await dispatch(deleteComment(id));
+    }
+  };
   return (
     <Grid item xs={12} sm={12} md={6} lg={3}>
       <Card sx={{maxWidth: 400, margin: 5}}>
@@ -38,6 +40,7 @@ const OneComment: React.FC<Props> = ({idComment, news_id, author, message}) => {
           <Typography >{author}</Typography>
         </CardActionArea>
           <LoadingButton
+            loading={deleting}
             onClick={onDelete}
             variant="outlined"
             color="error">

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchCommentsList } from './CommentsThunk';
+import { deleteComment, fetchCommentsList } from './CommentsThunk';
 import { RootState } from '../../app/store';
 import { ApiComment } from '../../types';
 
@@ -28,7 +28,16 @@ export const CommentsSlice = createSlice({
       state.fetching = false;
     });
     builder.addCase(fetchCommentsList.rejected, (state) => {
+      state.fetching = false;
+    });
+    builder.addCase(deleteComment.pending, (state) => {
       state.fetching = true;
+    });
+    builder.addCase(deleteComment.fulfilled, (state) => {
+      state.fetching = false;
+    });
+    builder.addCase(deleteComment.rejected, (state) => {
+      state.fetching = false;
     });
   }
 });

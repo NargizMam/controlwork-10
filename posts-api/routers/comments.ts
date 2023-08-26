@@ -55,7 +55,7 @@ commentsRouter.delete('/:id', async (req, res) => {
     const connection =  mysqlDb.getConnection();
     try {
         await connection.query(
-            'DELETE FROM ?? WHERE id = ?',
+            'DELETE FROM comments WHERE id = ?',
             [req.params.id]
         );
         res.send(`News comments if = ${req.params.id}  was deleted!` );

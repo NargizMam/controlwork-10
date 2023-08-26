@@ -22,3 +22,8 @@ export interface ApiComment {
     author: string | null,
     message: string
 }
+export interface CommentsMutation {
+  news_id: string,
+  author: string ,
+  message: string
+}

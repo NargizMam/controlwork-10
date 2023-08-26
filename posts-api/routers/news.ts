@@ -61,7 +61,7 @@ newsRouter.delete('/:id', async (req, res) => {
     const connection =  mysqlDb.getConnection();
     try {
          await connection.query(
-            'DELETE FROM ?? WHERE id = ?',
+            'DELETE FROM news WHERE id = ?',
             [req.params.id]
         );
         res.send(`News post if = ${req.params.id}  was deleted!` );

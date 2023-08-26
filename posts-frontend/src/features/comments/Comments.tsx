@@ -6,7 +6,6 @@ import { selectCommentsFetching, selectCommentsList } from './CommentsSlice';
 import { fetchCommentsList } from './CommentsThunk';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import OneComment from './components/OneComment';
-import { randomUUID } from 'crypto';
 import { nanoid } from 'nanoid';
 
 const Comments = () => {

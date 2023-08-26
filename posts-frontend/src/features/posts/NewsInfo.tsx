@@ -8,6 +8,9 @@ import dayjs from "dayjs";
 import { apiUrl } from '../../constants';
 import { Container, Grid, Paper, Typography } from '@mui/material';
 import Comments from '../comments/Comments';
+import CommentsForm from '../comments/components/CommentsForm';
+import { CommentsMutation } from '../../types';
+import { createComments } from '../comments/CommentsThunk';
 
 const NewsInfo= () => {
   const dispatch = useAppDispatch();
@@ -25,7 +28,9 @@ const NewsInfo= () => {
       dispatch(fetchOneNews(id));
     }
   }, [dispatch, id]);
-
+  const commentsCreate = async (comment: CommentsMutation) => {
+    await dispatch(createComments(comment));
+  };
   return newsInfo && (
     <Container >
       <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -41,6 +46,7 @@ const NewsInfo= () => {
       </Grid>
       <Grid>
       <Typography margin={3}>Add new comments</Typography>
+        <CommentsForm onSubmit={commentsCreate}/>
       </Grid>
     </Container>
 

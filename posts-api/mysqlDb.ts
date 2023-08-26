@@ -8,7 +8,7 @@ const mysqlDb = {
         if(config.db.database === ''){
             connection = await mysql.createConnection(config.db);
             await connection.query('CREATE DATABASE IF NOT EXISTS posts');
-            config.db.database = 'newsPortal'
+            config.db.database = 'posts'
         }
 
         connection = await mysql.createConnection(config.db);

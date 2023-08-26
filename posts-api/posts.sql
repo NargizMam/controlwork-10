@@ -13,20 +13,23 @@ create table comments
 (
     id      int auto_increment,
     news_id int                                not null,
-    author  varchar(100) default ('Anonymous') null,
+    author  varchar(100)  null,
     message text                               not null,
     constraint comments_pk
         primary key (id),
     constraint comments_news_id_fk
         foreign key (news_id) references news (id)
+        on update cascade on delete cascade
 );
+
 INSERT INTO posts.news (title, text, image, createdAt)
 VALUES ('Директор Британского музея подал в отставку после серии краж',
-        '"Ситуация, в которой оказался музей, чрезвычайно серьёзна", – говорится в заявлении Хартвига Фишера. Бывший сотрудник подозревается в разграблении запасников и продаже части экспонатов на eBay.',DEFAULT);
+        '"Ситуация, в которой оказался музей, чрезвычайно серьёзна", – говорится в заявлении Хартвига Фишера. Бывший сотрудник подозревается в разграблении запасников и продаже части экспонатов на eBay.',
+         'https://cdn.culture.ru/images/0dc07f05-b9ed-5160-8341-af6bae4776ae/h_400,c_fill,g_center/2f360ab408a0e1f45da55216c89e14ab-jpg', null, DEFAULT);
 INSERT INTO posts.news (title, text, image, createdAt)
     VALUES ('Миссия "Чандраян-3": первые шаги по Луне', 'Луноход индийской миссии "Чандраян-3" спустился по трапу и впервые прошел вблизи южного полюса спутника Земли
        Исторические кадры, иллюстрирующие вступление Индии в космическую гонку.
-       Через несколько часов после посадки луноход "Чандраян-3" спустился по трапу и впервые прошел вблизи южного полюса спутника Земли.',  DEFAULT);
+       Через несколько часов после посадки луноход "Чандраян-3" спустился по трапу и впервые прошел вблизи южного полюса спутника Земли.', 'https://ichef.bbci.co.uk/news/800/cpsprodpb/0377/live/c08546e0-4279-11ee-bd77-07de886a447c.jpg',null, DEFAULT);
 INSERT INTO posts.news (title, text, image, createdAt)
     VALUES ('Аншлаг на ЧМ по лёгкой атлетике в Будапеште', 'Судя по телевизионным рейтингам, зрительская аудитория этого ЧМ превысит рекорд, установленный на турнире в Лондоне в 2017 году.
        На 6-й день чемпионата мира по легкой атлетике спортсмены вышли на улицы Будапешта.
@@ -37,5 +40,26 @@ INSERT INTO posts.comments (news_id, author, message) VALUES (2, 'John', 'India 
 INSERT INTO posts.comments (news_id, author, message) VALUES (3, DEFAULT, 'Если бы!');
 INSERT INTO posts.comments (news_id, author, message) VALUES (2, 'Алекс', 'Верю в будущее прекрасное!');
 INSERT INTO posts.comments (news_id, author, message) VALUES (1, DEFAULT, '2222');
+INSERT INTO posts.comments (news_id, author, message) VALUES (3, 'аа', '33');
+INSERT INTO posts.comments (news_id, author, message) VALUES (1, '5464', '56646');
+
+
+INSERT INTO posts.news (title, text, image, createdAt)
+VALUES ('Директор Британского музея подал в отставку после серии краж',
+        '"Ситуация, в которой оказался музей, чрезвычайно серьёзна", – говорится в заявлении Хартвига Фишера. Бывший сотрудник подозревается в разграблении запасников и продаже части экспонатов на eBay.',null, DEFAULT);
+INSERT INTO posts.news (title, text, image, createdAt)
+    VALUES ('Миссия "Чандраян-3": первые шаги по Луне', 'Луноход индийской миссии "Чандраян-3" спустился по трапу и впервые прошел вблизи южного полюса спутника Земли
+       Исторические кадры, иллюстрирующие вступление Индии в космическую гонку.
+       Через несколько часов после посадки луноход "Чандраян-3" спустился по трапу и впервые прошел вблизи южного полюса спутника Земли.', null, DEFAULT);
+INSERT INTO posts.news (title, text, image, createdAt)
+    VALUES ('Аншлаг на ЧМ по лёгкой атлетике в Будапеште', 'Судя по телевизионным рейтингам, зрительская аудитория этого ЧМ превысит рекорд, установленный на турнире в Лондоне в 2017 году.
+       На 6-й день чемпионата мира по легкой атлетике спортсмены вышли на улицы Будапешта.
+       35-километровая дистанция пролегала по одной из самых красивых улиц венгерской столицы — проспекту Андраши, который местные жители называют будапештскими "елисейскими полями". Финишировали ходоки на площади Героев. Золото и у мужчин, и у женщин завоевали испанские атлеты - Альваро Мартин и Мария Перес.', null, DEFAULT);
+
+INSERT INTO posts.comments (news_id, author, message) VALUES (1, null, 'Давно пора уходить');
+INSERT INTO posts.comments (news_id, author, message) VALUES (2, 'John', 'India GOOOOO!!');
+INSERT INTO posts.comments (news_id, author, message) VALUES (3, null, 'Если бы!');
+INSERT INTO posts.comments (news_id, author, message) VALUES (2, 'Алекс', 'Верю в будущее прекрасное!');
+INSERT INTO posts.comments (news_id, author, message) VALUES (1, null, '2222');
 INSERT INTO posts.comments (news_id, author, message) VALUES (3, 'аа', '33');
 INSERT INTO posts.comments (news_id, author, message) VALUES (1, '5464', '56646');

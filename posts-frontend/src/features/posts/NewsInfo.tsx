@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import noImageAvailable from '../../../assets/images/noImage.jpg';
-import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { selectNewsInfo } from '../PostsSlice';
-import { fetchOneNews } from '../PostsThunk';
+import noImageAvailable from '../../assets/images/noImage.jpg';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { selectNewsInfo } from './PostsSlice';
+import { fetchOneNews } from './PostsThunk';
 import dayjs from "dayjs";
-import { apiUrl } from '../../../constants';
+import { apiUrl } from '../../constants';
 import { Container, Grid, Paper, Typography } from '@mui/material';
+import Comments from '../comments/Comments';
 
 const NewsInfo= () => {
   const dispatch = useAppDispatch();
@@ -36,7 +37,7 @@ const NewsInfo= () => {
         </Paper>
       </Grid>
       <Grid>
-        <Typography margin={3}>Comments</Typography>
+        <Comments/>
       </Grid>
       <Grid>
       <Typography margin={3}>Add new comments</Typography>

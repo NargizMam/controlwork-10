@@ -40,7 +40,7 @@ const OneNews: React.FC<Props> = ({id, title, image, createdAt}) => {
 
   const onDeleteNews = async () => {
     await dispatch(deleteNews(id));
-    dispatch(fetchNewsList());
+    await dispatch(fetchNewsList());
   };
 
   return (

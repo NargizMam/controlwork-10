@@ -16,10 +16,9 @@ export interface NewsMutation {
     text: string,
     image: string | null,
 }
-export interface Comment {
-    id: number,
-    news_id: number,
-    author: string,
+export interface ApiComment {
+    id: string,
+    news_id: string,
+    author: string | null,
     message: string
 }
-export type ApiComment = Omit<Comment, 'id'>

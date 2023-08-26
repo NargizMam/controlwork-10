@@ -1,25 +1,39 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { Button, Grid, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
-import { useAppDispatch } from '../../app/hooks';
+import { Link, useParams } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { selectCommentsFetching, selectCommentsList } from './CommentsSlice';
+import { fetchCommentsList } from './CommentsThunk';
+import Spinner from '../../components/UI/Spinner/Spinner';
+import OneComment from './components/OneComment';
+import { randomUUID } from 'crypto';
+import { nanoid } from 'nanoid';
 
 const Comments = () => {
   const dispatch = useAppDispatch();
-  // const commentsList = useAppSelector(selectCommentsList);
-  // const fetching = useAppSelector(selectFetching);
-  //
-  // useEffect(() => {
-  //   dispatch(fetchNewsList());
-  // }, [dispatch]);
-  //
-  // const oneNews = commentsList.map(comment => (
-  //   <OneComment key={comment.id}
-  //            id={comment.id}
-  //            title={comment.title}
-  //            createdAt={comment.createdAt}
-  //            image={comment.image}
-  //   />
-  // ));
+  const commentsList = useAppSelector(selectCommentsList);
+  const fetching = useAppSelector(selectCommentsFetching);
+  const {id} = useParams();
+  const fetchList = useCallback(async () => {
+    if(id){
+     await dispatch(fetchCommentsList(id));
+    }
+  }, [dispatch, id]);
+
+
+  useEffect(() => {
+    fetchList().catch();
+  }, [fetchList]);
+
+  const oneComments = commentsList.map(comment => (
+      <OneComment idComment={comment.id}
+                  news_id={comment.news_id}
+                  author={comment.author}
+                  message={comment.message}
+                  key={nanoid()}
+      />
+    )
+  )
   return (
     <>
       <Grid container justifyContent="space-between" alignItems="center">
@@ -34,8 +48,8 @@ const Comments = () => {
           </Button>
         </Grid>
       </Grid>
-      {/*{fetching ? <Spinner/> : null}*/}
-      {/*{oneNews}*/}
+      {fetching ? <Spinner/> : null}
+      {oneComments}
     </>
 
   );

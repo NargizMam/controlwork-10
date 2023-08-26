@@ -4,13 +4,13 @@ import { RootState } from '../../app/store';
 import { createNews, deleteNews, fetchNewsList, fetchOneNews } from './PostsThunk';
 
 interface NewsState {
-  newsList: ApiNews[],
-  newsInfo: News | null,
-  fetching: boolean,
-  oneFetching: boolean,
-  creating: boolean,
-  deleting: boolean,
-  callbackMessage: string
+  newsList: ApiNews[];
+  newsInfo: News | null;
+  fetching: boolean;
+  oneFetching: boolean;
+  creating: boolean;
+  deleting: boolean;
+  callbackMessage: string;
 }
 const initialState: NewsState = {
   newsList: [],

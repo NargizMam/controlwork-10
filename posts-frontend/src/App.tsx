@@ -4,7 +4,7 @@ import AppToolBar from './components/UI/AppToolBar/AppToolBar';
 import {Container, CssBaseline} from '@mui/material';
 import Posts from './features/posts/Posts';
 import NewPost from './features/posts/NewPost';
-import NewsInfo from './features/posts/components/NewsInfo';
+import NewsInfo from './features/posts/NewsInfo';
 
 const App = () => (
     <>
